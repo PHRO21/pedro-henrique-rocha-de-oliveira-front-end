@@ -1,22 +1,24 @@
+import { SharedModule } from './shared/shared/shared.module';
+import { AutorModule } from './autor/autor.module';
+import { LivroModule } from './livro/livro.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ListaAutoresComponent } from './lista-autores/lista-autores.component';
-import { CriaAutoresComponent } from './cria-autores/cria-autores.component';
-import { AlteraAutorComponent } from './altera-autor/altera-autor.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ListaAutoresComponent,
-    CriaAutoresComponent,
-    AlteraAutorComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CommonModule,
+    SharedModule,
+    LivroModule,
+    AutorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
