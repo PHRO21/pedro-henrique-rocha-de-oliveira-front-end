@@ -1,0 +1,14 @@
+.rodape{
+  display:inline;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100vw;
+  background-color: black;
+}
+.rodape p{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  color: white;
+}
