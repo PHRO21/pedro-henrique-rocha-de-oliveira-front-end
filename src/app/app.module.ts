@@ -1,26 +1,30 @@
+import { HomeModule } from './components/home/home.module';
+import { MenuModule } from './shared/menu/menu.module';
+import { RodapeModule } from './shared/rodape/rodape.module';
+import { MensagemModule } from './shared/mensagem/mensagem.module';
 import { AutorModule } from './components/autor/autor.module';
 import { LivroModule } from './components/livro/livro.module';
-import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent
-  ],
+    AppComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule,
-    SharedModule,
     LivroModule,
-    AutorModule
+    AutorModule,
+    MensagemModule,
+    RodapeModule,
+    MenuModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

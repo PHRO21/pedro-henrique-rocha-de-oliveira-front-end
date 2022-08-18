@@ -1,7 +1,11 @@
 .menu{
   display: block;
 }
-.menu ul{
+.navbar-nav{
+  display: flex;
+  justify-content: right;
+}
+.menu-nav{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;

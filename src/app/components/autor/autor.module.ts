@@ -3,6 +3,7 @@ import { CriaAutoresComponent } from './cria-autores/cria-autores.component';
 import { ListaAutoresComponent } from './lista-autores/lista-autores.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ListaLivrosAutorComponent } from './lista-livros-autor/lista-livros-autor.component';
 
 
 
@@ -10,7 +11,8 @@ import { CommonModule } from '@angular/common';
   declarations: [
     ListaAutoresComponent,
     CriaAutoresComponent,
-    AlteraAutorComponent
+    AlteraAutorComponent,
+    ListaLivrosAutorComponent
   ],
   imports: [
     CommonModule
