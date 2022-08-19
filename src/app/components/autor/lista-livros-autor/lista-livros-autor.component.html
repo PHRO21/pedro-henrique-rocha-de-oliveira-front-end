@@ -1,1 +1,17 @@
-<p>lista-livros-autor works!</p>
+<div class="container">
+  <form [formGroup]="cadastroForm" class="form-group mt-3" (ngSubmit)="buscaLivrosPorIdAutor()" #formDir="ngForm">
+
+    <div class="mb-3">
+      <label for="id" class="form-label">Id Autor</label>
+      <input type="text" class="form-control" id="id" name="id" placeholder="Digite o nome" formControlName="id"
+        required>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+
+  <ul *ngIf="livros.length > 0">
+    <li *ngFor="let livro of livros">
+      <p>Id: {{livro.id}}- Nome: {{livro.titulo}}</p>
+    </li>
+  </ul>
+</div>

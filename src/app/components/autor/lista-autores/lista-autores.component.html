@@ -1,1 +1,20 @@
-<p>lista-autores works!</p>
+<main>
+  <form [formGroup]="cadastroForm" class="form-group mt-3" (ngSubmit)="buscaAutorPorId()" #formDir="ngForm">
+    <div class="mb-2">
+      <label for="id" class="form-label">Buscar Autor por Id</label>
+      <input type="text" class="form-control" id="id" name="id" placeholder="Digite o id do autor que deseja buscar" formControlName="id"
+        required>
+    </div>
+    <button type="submit" class="btn btn-primary m-2">Buscar</button>
+    <button (click)="listaTodos()" class="btn btn-primary">Listar Todos</button>
+  </form>
+
+  <ul class="m-3" *ngIf="todos">
+    <li *ngFor="let autor of autores">
+      <p>Id: {{autor.id}} - Nome: {{autor.nome}}</p>
+    </li>
+  </ul>
+  <div *ngIf="!todos">
+    <p>Id: {{autorEncontrado.id}} - Nome: {{autorEncontrado.nome}}</p>
+  </div>
+</main>

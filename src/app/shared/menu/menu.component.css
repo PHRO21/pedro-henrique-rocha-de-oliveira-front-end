@@ -1,22 +1,4 @@
-.menu{
-  display: block;
-}
-.navbar-nav{
-  display: flex;
-  justify-content: right;
-}
-.menu-nav{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-
-}
-.menu a{
+a{
   text-decoration: none;
-  color:white;
-  padding: 2px;
-}
-.menu a:hover{
-  border-bottom: 1px white solid;
-  transition: 0.3s;
+  color: white;
 }

@@ -1,9 +1,37 @@
-<nav class="navbar navbar-dark bg-dark menu">
-  <ul class="navbar-nav ">
-    <div class="menu-nav">
-      <li class="nav-item"><a routerLink="/">Home</a></li>
-      <li class="nav-item"><a routerLink="/livros">Livros</a></li>
-      <li class="nav-item"><a routerLink="/autores">Autores</a></li>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <ul class="btn-group">
+    <li class="btn btn-dark">
+      <a routerLink="/autores">Listar Autores</a>
+    </li>
+
+    <li class="btn btn-dark">
+      <a routerLink="/autores/cadastra">Cadastrar Autor</a>
+    </li>
+
+    <li class="btn btn-dark">
+      <a routerLink="/autores/altera">Alterar Autor</a>
+    </li>
+
+    <li class="btn btn-dark" >
+      <a routerLink="/autores/livros">Listar Livros do Autor</a>
+    </li>
+  </ul>
+
+  <ul class="btn-group">
+    <li class="btn btn-dark" type="button">
+      <a routerLink="/livros">Listar Livros</a>
+    </li>
+
+    <li class="btn btn-dark" type="button">
+      <a routerLink="/livros/cadastra">Cadastrar Livro</a>
+    </li>
+
+    <li class="btn btn-dark" type="button">
+      <a routerLink="/livros/altera">Alterar Livro</a>
+    </li>
+
+    <li class="btn btn-dark" type="button">
+      <a routerLink="/livros/deleta">Deletar Livro</a>
+    </li>
   </ul>
 </nav>
