@@ -1,4 +1,4 @@
-import { Livro } from './../components/livro/livro';
+import { LivroOutput } from '../components/livro/livroOutput';
 import { Autor } from './../components/autor/autor';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -30,7 +30,7 @@ export class AutorService {
     return this.http.get<Autor>(`${API}/autores/${id}`)
   }
 
-  buscaLivrosDoAutor(id:number|undefined):Observable<Livro[]>{
-    return this.http.get<Livro[]>(`${API}/autores/${id}/livros`);
+  buscaLivrosDoAutor(id:number|undefined):Observable<LivroOutput[]>{
+    return this.http.get<LivroOutput[]>(`${API}/autores/${id}/livros`);
   }
 }

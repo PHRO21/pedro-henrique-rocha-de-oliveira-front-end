@@ -1,5 +1,6 @@
 <div class="container">
-  <form [formGroup]="cadastroForm" class="form-group mt-3" (ngSubmit)="enviar()" #formDir="ngForm">
+  <h2 class="text-center">Cadastrar Autor</h2>
+  <form [formGroup]="cadastroForm" class="form-group mt-3" (ngSubmit)="cadastrar()" #formDir="ngForm">
 
     <div class="mb-3">
       <label for="nome" class="form-label">Nome</label>

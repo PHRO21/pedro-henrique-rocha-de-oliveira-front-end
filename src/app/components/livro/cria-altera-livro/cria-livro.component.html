@@ -1,19 +1,6 @@
 <div class="container">
-  <h2 class="text-center">Alterar Livro</h2>
-  <form [formGroup]="cadastroForm" class="form-group mt-3" (ngSubmit)="alterar()" #formDir="ngForm">
-
-    <div class="mb-3">
-      <label for="id" class="form-label">Id Livro</label>
-      <input
-        type="number"
-        class="form-control"
-        id="id"
-        name="id"
-        placeholder="Digite o id do Livro que deseja alterar"
-        formControlName="id"
-        required
-        >
-    </div>
+  <h2 class="text-center">Cadastrar Livro</h2>
+  <form [formGroup]="cadastroForm" class="form-group mt-3" (ngSubmit)="cadastrar()" #formDir="ngForm">
 
     <div class="mb-3">
       <label for="titulo" class="form-label">Titulo</label>

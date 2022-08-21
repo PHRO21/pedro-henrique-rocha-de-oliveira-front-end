@@ -1,4 +1,4 @@
-import { Livro } from './../../livro/livro';
+import { LivroOutput} from '../../livro/livroOutput';
 import { AutorService } from 'src/app/services/autor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +11,7 @@ import { Autor } from '../autor';
 })
 export class ListaLivrosAutorComponent implements OnInit {
   cadastroForm!: FormGroup;
-  livros:Livro[] = [];
+  livros:LivroOutput[] = [];
 
   constructor(
     private autorService: AutorService,

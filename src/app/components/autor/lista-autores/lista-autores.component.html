@@ -6,7 +6,6 @@
         required>
     </div>
     <button type="submit" class="btn btn-primary m-2">Buscar</button>
-    <button (click)="listaTodos()" class="btn btn-primary">Listar Todos</button>
   </form>
 
   <ul class="m-3" *ngIf="todos">
@@ -16,5 +15,6 @@
   </ul>
   <div *ngIf="!todos">
     <p>Id: {{autorEncontrado.id}} - Nome: {{autorEncontrado.nome}}</p>
+    <button (click)="listaTodos()" class="btn btn-primary">Listar Todos</button>
   </div>
 </main>

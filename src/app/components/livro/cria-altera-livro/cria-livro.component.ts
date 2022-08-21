@@ -5,12 +5,11 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-altera-livro',
-  templateUrl: './altera-livro.component.html',
-  styleUrls: ['./altera-livro.component.css']
+  selector: 'app-cria-livro',
+  templateUrl: './cria-livro.component.html',
+  styleUrls: ['./cria-livro.component.css']
 })
-
-export class AlteraLivroComponent implements OnInit {
+export class CriaLivroComponent implements OnInit {
 
   cadastroForm!: FormGroup;
   autores!: FormArray;
@@ -23,7 +22,6 @@ export class AlteraLivroComponent implements OnInit {
 
   ngOnInit(): void {
     this.cadastroForm = this.formBuilder.group({
-      id:[''],
       titulo: ['', [Validators.required]],
       anoLancamento: ['', [Validators.required]],
       autores: this.formBuilder.array(['', [Validators.required]]),
@@ -45,7 +43,7 @@ export class AlteraLivroComponent implements OnInit {
   //   this.cadastroForm.patchValue(this.autores);
   // }
 
-  alterar() {
+  cadastrar() {
     if(this.cadastroForm.valid){
       const novoLivro = this.cadastroForm.getRawValue() as LivroInput;
       console.log(novoLivro)
@@ -56,4 +54,3 @@ export class AlteraLivroComponent implements OnInit {
    }
   }
 }
-

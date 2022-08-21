@@ -24,7 +24,7 @@ export class CriaAutoresComponent implements OnInit {
       biografia: ['', [Validators.required]],
     });
   }
-  enviar() {
+  cadastrar() {
     if(this.cadastroForm.valid){
       const novoAutor = this.cadastroForm.getRawValue() as Autor;
       this.autorService.cadastraAutor(novoAutor).subscribe(()=>{

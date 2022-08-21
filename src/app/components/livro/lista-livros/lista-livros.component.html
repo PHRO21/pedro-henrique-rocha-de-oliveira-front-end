@@ -1,1 +1,32 @@
-<p>lista-livros works!</p>
+<main>
+  <form [formGroup]="cadastroForm" class="form-group m-3" (ngSubmit)="buscaLivroPorId()" #formDir="ngForm">
+    <div class="mb-2">
+      <label for="id" class="form-label">Buscar Autor por Id</label>
+      <input type="text" class="form-control" id="id" name="id" placeholder="Digite o id do autor que deseja buscar" formControlName="id"
+        required>
+    </div>
+    <button type="submit" class="btn btn-primary m-2">Buscar</button>
+  </form>
+
+  <ul class="m-3" *ngIf="todos">
+    <li class="lista" *ngFor="let livro of livros">
+      <div class="lista-p">
+        <p>Id: {{livro.id}} - Nome: {{livro.titulo}}</p>
+        <p>Nome: {{livro.titulo}}</p>
+      </div>
+      <div class="icone">
+        <button type="button" (click)="deleta(livro.id)"><i class="fa fa-solid fa-trash"></i></button>
+      </div>
+    </li>
+    <hr>
+  </ul>
+  <div class="m-3 " *ngIf="!todos">
+    <div class="lista">
+      <p>Id: {{livroOutput.id}} - Nome: {{livroOutput.titulo}}</p>
+      <div class="icone">
+        <button type="button" (click)="deleta(livroOutput.id)"><i class="fa fa-solid fa-trash"></i></button>
+      </div>
+    </div>
+    <button (click)="listaTodos()" class="btn btn-primary">Listar Todos</button>
+  </div>
+</main>

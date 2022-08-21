@@ -23,7 +23,7 @@ export class ListaAutoresComponent implements OnInit {
   ngOnInit(): void {
     this.listaTodos();
     this.cadastroForm = this.formBuilder.group({
-      id: ['', [Validators.required]],
+      id: ['', [Validators.required]]
     });
   }
 
