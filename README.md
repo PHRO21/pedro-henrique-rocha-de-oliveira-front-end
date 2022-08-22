@@ -16,18 +16,17 @@ Projeto de front-end básico para consumo da api da :books: Biblioteca Acelera G
     - `mvn install`
     - `cd target`
     - `java -jar biblioteca-0.0.1-SNAPSHOT.jar`
-   Dessa form a API será executada no endereço _http://localhost:8080_
+    
+   A API será executada, por padrão, no endereço _http://localhost:8080_
    
 - Front-End
-Abra a pasta raíz do projeto e rode, em qulquer prompt de comando, o código para a instalação das de pendências do angular 
+  - Abra a pasta raíz do projeto e rode, em qulquer prompt de comando, o código para a instalação das de pendências do angular 
+    - `npm i`
 
-`npm i`
+  - Com a API do back-end rodando, inicalize a aplicação com o comando:
+    - `ng serve`
 
-Com a API do back-end rodando, inicalize a aplicação com o comando:
-
-`ng serve`
-
-A aplicação vai rodar, por padrão, no endereço _http://localhost:4200_
+  A aplicação vai rodar, por padrão, no endereço _http://localhost:4200_
 
 ## :exclamation: Em caso de bloqueio pelo Cors da API
 Caso o acesso a alguns endpoints da API seja bloqueado pelo cors, será necessário adcionar uma classe de configuração no pacote :file_folder:_biblioteca/src/main/java/com/example/demo/configs/_
@@ -50,5 +49,3 @@ public class CorsConfiguration implements WebMvcConfigurer {
     }
 }
 ```
-****
-Projeto Gerado com Angular version 13.2.6.
