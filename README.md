@@ -1,27 +1,51 @@
 # PedroHenriqueRochaDeOliveiraFrontEnd
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.6.
+Projeto de front-end básico para consumo da api da :books: Biblioteca Acelera G&P localizada neste repositório [link](https://github.com/aceleragep/biblioteca)
 
-## Development server
+## - Requisitos Básicos
+ - NodeJs (Para instalação das dependências do Angular)
+ - Angular CLI versão 13.2.6
+ - Maven (Para rodar API back-end) 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## - Instruções Iniciais
 
-## Code scaffolding
+- Back-end
+  - Faça o clone da [API](https://github.com/aceleragep/biblioteca);
+  - Em um prompt de comando qualquer, execute os seguintes passos;
+  No diretório raiz, execute
+    - `mvn install`
+    - `cd target`
+    - `java -jar biblioteca-0.0.1-SNAPSHOT.jar`
+    
+   A API será executada, por padrão, no endereço _http://localhost:8080_
+   
+- Front-End
+  - Abra a pasta raíz do projeto e rode, em qulquer prompt de comando, o código para a instalação das de pendências do angular 
+    - `npm i`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+  - Com a API do back-end rodando, inicalize a aplicação com o comando:
+    - `ng serve`
 
-## Build
+  A aplicação vai rodar, por padrão, no endereço _http://localhost:4200_
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## :exclamation: Em caso de bloqueio pelo Cors da API
+Caso o acesso a alguns endpoints da API seja bloqueado pelo cors, será necessário adcionar uma classe de configuração no pacote :file_folder:_biblioteca/src/main/java/com/example/demo/configs/_
 
-## Running unit tests
+```
+package com.example.demo.configs;
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-## Running end-to-end tests
+@Configuration
+public class CorsConfiguration implements WebMvcConfigurer {
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+            .allowedOrigins("*")
+            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
+    }
+}
+```
