@@ -1,8 +1,10 @@
+import { MatDialog } from '@angular/material/dialog';
 import { LivroOutput} from '../../livro/livroOutput';
 import { AutorService } from 'src/app/services/autor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Autor } from '../autor';
+import { MensagemComponent } from 'src/app/shared/mensagem/mensagem.component';
 
 @Component({
   selector: 'app-lista-livros-autor',
@@ -15,7 +17,8 @@ export class ListaLivrosAutorComponent implements OnInit {
 
   constructor(
     private autorService: AutorService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -29,5 +32,11 @@ export class ListaLivrosAutorComponent implements OnInit {
       const idAutor = this.cadastroForm.getRawValue() as Autor;
       this.autorService.buscaLivrosDoAutor(idAutor.id).subscribe((livros)=> (this.livros = livros));
     }
+  }
+
+  resposta(mensagem: string){
+    this.dialog.open(MensagemComponent,{
+      data: mensagem
+    })
   }
 }

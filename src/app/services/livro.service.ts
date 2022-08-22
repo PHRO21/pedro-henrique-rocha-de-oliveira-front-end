@@ -30,8 +30,7 @@ export class LivroService {
     return this.http.get<LivroOutput>(`${API}/livros/${id}`)
   }
 
-  deletaLivro(id: number | undefined){
-    console.log(`${API}/livros/${id}`)
-    this.http.delete(`${API}/livros/${id}`);
+  deletaLivro(id: number | undefined):Observable<LivroOutput>{
+    return this.http.delete<LivroOutput>(`${API}/livros/${id}`);
   }
 }

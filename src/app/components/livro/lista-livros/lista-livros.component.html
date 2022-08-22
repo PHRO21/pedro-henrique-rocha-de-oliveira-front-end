@@ -1,4 +1,4 @@
-<main>
+<main class="container">
   <form [formGroup]="cadastroForm" class="form-group m-3" (ngSubmit)="buscaLivroPorId()" #formDir="ngForm">
     <div class="mb-2">
       <label for="id" class="form-label">Buscar Autor por Id</label>
@@ -8,25 +8,36 @@
     <button type="submit" class="btn btn-primary m-2">Buscar</button>
   </form>
 
-  <ul class="m-3" *ngIf="todos">
-    <li class="lista" *ngFor="let livro of livros">
-      <div class="lista-p">
-        <p>Id: {{livro.id}} - Nome: {{livro.titulo}}</p>
-        <p>Nome: {{livro.titulo}}</p>
-      </div>
-      <div class="icone">
-        <button type="button" (click)="deleta(livro.id)"><i class="fa fa-solid fa-trash"></i></button>
-      </div>
-    </li>
-    <hr>
-  </ul>
-  <div class="m-3 " *ngIf="!todos">
-    <div class="lista">
-      <p>Id: {{livroOutput.id}} - Nome: {{livroOutput.titulo}}</p>
+  <table class="m-3 table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Titulo</th>
+        <th>Id Autores</th>
+      </tr>
+    </thead>
+
+    <tbody  *ngIf="todos" >
+      <tr *ngFor="let livro of livros">
+        <td>{{livro.id}}</td>
+        <td>{{livro.titulo}}</td>
+        <td>{{livro.autores}}</td>
+        <div class="icone">
+          <button type="button" (click)="deleta(livro.id)"><i class="fa fa-solid fa-trash"></i></button>
+        </div>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="!todos" class="m-3" >
+      <tr>
+        <td>{{livroOutput.id}}</td>
+        <td>{{livroOutput.titulo}}</td>
+        <td>{{livroOutput.autores}}</td>
+      </tr>
       <div class="icone">
         <button type="button" (click)="deleta(livroOutput.id)"><i class="fa fa-solid fa-trash"></i></button>
       </div>
-    </div>
-    <button (click)="listaTodos()" class="btn btn-primary">Listar Todos</button>
-  </div>
+      <button (click)="listaTodos()" class="btn btn-primary">Listar Todos</button>
+    </tbody>
+  </table>
 </main>

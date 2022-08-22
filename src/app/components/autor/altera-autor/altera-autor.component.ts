@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 import { AutorService } from 'src/app/services/autor.service';
+import { MensagemComponent } from 'src/app/shared/mensagem/mensagem.component';
 import { Autor } from '../autor';
 
 @Component({
@@ -15,7 +18,8 @@ export class AlteraAutorComponent implements OnInit {
   constructor(
     private autorService: AutorService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -27,11 +31,21 @@ export class AlteraAutorComponent implements OnInit {
   }
   atualiza() {
     if(this.cadastroForm.valid){
-      const autorAtualizado = this.cadastroForm.getRawValue() as Autor;
-      this.autorService.atualizaAutor(autorAtualizado).subscribe(()=>{
-        this.router.navigate(['/autores']);
+      const novoAutor = this.cadastroForm.getRawValue() as Autor;
+      this.autorService.atualizaAutor(novoAutor).subscribe(sucesso =>{
+        this.resposta("Autor atualizado com sucesso")
+        this.router.navigate(['/autores'])
       },
-        (error)=> console.log(error));
+        error => {
+          this.resposta("Erro ao Cadastrar Autor");
+          return of([])
+        })
     }
+  }
+
+  resposta(mensagem: string){
+    this.dialog.open(MensagemComponent,{
+      data: mensagem
+    })
   }
 }

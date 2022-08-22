@@ -1,8 +1,11 @@
+import { MensagemComponent } from './../../../shared/mensagem/mensagem.component';
 import { AutorService } from './../../../services/autor.service';
 import { Autor } from './../autor';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-cria-autores',
@@ -15,7 +18,8 @@ export class CriaAutoresComponent implements OnInit {
   constructor(
     private autorService: AutorService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -27,10 +31,20 @@ export class CriaAutoresComponent implements OnInit {
   cadastrar() {
     if(this.cadastroForm.valid){
       const novoAutor = this.cadastroForm.getRawValue() as Autor;
-      this.autorService.cadastraAutor(novoAutor).subscribe(()=>{
-        this.router.navigate(['/autores']);
+      this.autorService.cadastraAutor(novoAutor).subscribe(sucesso =>{
+        this.resposta("Autor cadastrado com sucesso")
+        this.router.navigate(['/autores'])
       },
-        (error)=> alert(error));
+        error => {
+          this.resposta("Erro ao Cadastrar Autor");
+          return of([])
+        })
     }
+  }
+
+  resposta(mensagem: string){
+    this.dialog.open(MensagemComponent,{
+      data: mensagem
+    })
   }
 }

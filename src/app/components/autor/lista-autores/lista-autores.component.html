@@ -1,4 +1,4 @@
-<main>
+<main class="container">
   <form [formGroup]="cadastroForm" class="form-group mt-3" (ngSubmit)="buscaAutorPorId()" #formDir="ngForm">
     <div class="mb-2">
       <label for="id" class="form-label">Buscar Autor por Id</label>
@@ -8,13 +8,30 @@
     <button type="submit" class="btn btn-primary m-2">Buscar</button>
   </form>
 
-  <ul class="m-3" *ngIf="todos">
-    <li *ngFor="let autor of autores">
-      <p>Id: {{autor.id}} - Nome: {{autor.nome}}</p>
-    </li>
-  </ul>
-  <div *ngIf="!todos">
-    <p>Id: {{autorEncontrado.id}} - Nome: {{autorEncontrado.nome}}</p>
+  <table class="m-3 table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Biografia</th>
+      </tr>
+    </thead>
+
+    <tbody  *ngIf="todos" >
+      <tr *ngFor="let autor of autores">
+        <td>{{autor.id}}</td>
+        <td>{{autor.nome}}</td>
+        <td>{{autor.biografia}}</td>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="!todos" class="m-3" >
+      <tr>
+        <td>{{autorEncontrado.id}}</td>
+        <td>{{autorEncontrado.nome}}</td>
+        <td>{{autorEncontrado.biografia}}</td>
+      </tr>
+    </tbody>
+  </table>
     <button (click)="listaTodos()" class="btn btn-primary">Listar Todos</button>
-  </div>
 </main>

@@ -4,15 +4,8 @@
 
     <div class="mb-3">
       <label for="nome" class="form-label">Nome</label>
-      <input
-        type="text"
-        class="form-control"
-        id="nome"
-        name="nome"
-        placeholder="Digite o nome"
-        formControlName="nome"
-        required
-        >
+      <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome" formControlName="nome"
+        required>
 
       <div *ngIf="cadastroForm.get('nome')?.errors?.['required'] && formDir.submitted" class="erro-validacao">
         <p>O Nome é Obrigatório.</p>
@@ -21,13 +14,8 @@
 
     <div class="mb-3">
       <label for="biografia" class="form-label">Biografia</label>
-      <textarea
-        class="form-control"
-        id="biografia"
-        name="biografia"
-        placeholder="Digite a biografia"
-        formControlName="biografia"
-        >
+      <textarea class="form-control" id="biografia" name="biografia" placeholder="Digite a biografia"
+        formControlName="biografia">
       </textarea>
       <div *ngIf="cadastroForm.get('biografia')?.errors?.['required']&& formDir.submitted" class="erro-validacao">
         <p>O Biografia é Obrigatório.</p>

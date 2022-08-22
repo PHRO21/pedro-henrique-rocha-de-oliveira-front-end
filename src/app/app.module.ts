@@ -1,6 +1,5 @@
 
 import { MenuModule } from './shared/menu/menu.module';
-import { RodapeModule } from './shared/rodape/rodape.module';
 import { MensagemModule } from './shared/mensagem/mensagem.module';
 import { AutorModule } from './components/autor/autor.module';
 import { LivroModule } from './components/livro/livro.module';
@@ -14,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,12 +26,12 @@ import { CommonModule } from '@angular/common';
     LivroModule,
     AutorModule,
     MensagemModule,
-    RodapeModule,
     MenuModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

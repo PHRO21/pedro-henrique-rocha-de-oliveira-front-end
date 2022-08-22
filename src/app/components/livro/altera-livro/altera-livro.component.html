@@ -1,7 +1,6 @@
 <div class="container">
   <h2 class="text-center">Alterar Livro</h2>
   <form [formGroup]="cadastroForm" class="form-group mt-3" (ngSubmit)="alterar()" #formDir="ngForm">
-
     <div class="mb-3">
       <label for="id" class="form-label">Id Livro</label>
       <input
@@ -63,7 +62,6 @@
         <p>É necessário no mínimo um Autor!</p>
       </div>
     </div>
-
     <button type="submit" class="btn btn-primary">Enviar</button>
   </form>
 </div>

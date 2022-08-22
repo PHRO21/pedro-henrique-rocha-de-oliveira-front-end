@@ -1,3 +1,5 @@
+import { MatDialog } from '@angular/material/dialog';
+import { MensagemComponent } from './../../../shared/mensagem/mensagem.component';
 import { LivroInput } from '../LivroInput';
 import { Router } from '@angular/router';
 import { LivroService } from '../../../services/livro.service';
@@ -14,11 +16,13 @@ export class AlteraLivroComponent implements OnInit {
 
   cadastroForm!: FormGroup;
   autores!: FormArray;
+  text = '';
 
   constructor(
     private livroService: LivroService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -47,13 +51,20 @@ export class AlteraLivroComponent implements OnInit {
 
   alterar() {
     if(this.cadastroForm.valid){
-      const novoLivro = this.cadastroForm.getRawValue() as LivroInput;
-      console.log(novoLivro)
-      this.livroService.cadastraLivro(novoLivro).subscribe(()=>{
-        this.router.navigate(['/livros']);
+      const livroAtualizado = this.cadastroForm.getRawValue() as LivroInput;
+      this.livroService.atualizaLivro(livroAtualizado).subscribe(sucesso =>{
+        this.resposta("Livro alterado com sucesso")
+        this.router.navigate(['/livros'])
       },
-      (error)=> console.log(error));
-   }
+        error => {
+          this.resposta("Ocorreu um erro ao alterar livro, tente novamente");
+        })
+    }
+  }
+
+  resposta(mensagem: string){
+    this.dialog.open(MensagemComponent,{
+      data: mensagem
+    })
   }
 }
-

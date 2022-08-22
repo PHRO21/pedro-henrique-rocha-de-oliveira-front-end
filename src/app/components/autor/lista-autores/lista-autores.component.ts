@@ -1,7 +1,10 @@
+import { of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 import { AutorService } from './../../../services/autor.service';
 import { Component, OnInit } from '@angular/core';
 import { Autor } from '../autor';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MensagemComponent } from 'src/app/shared/mensagem/mensagem.component';
 
 @Component({
   selector: 'app-lista-autores',
@@ -17,7 +20,8 @@ export class ListaAutoresComponent implements OnInit {
 
   constructor(
     private autorService: AutorService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -31,7 +35,11 @@ export class ListaAutoresComponent implements OnInit {
     this.todos = true;
     this.autorService
       .buscaTodosAutores()
-      .subscribe((autores) => (this.autores = autores));
+      .subscribe((autores) => (this.autores = autores),
+      error => {
+        this.resposta(`Erro ao carregar autores`);
+        return of([])
+      });
   }
 
   buscaAutorPorId() {
@@ -40,7 +48,17 @@ export class ListaAutoresComponent implements OnInit {
       const autor = this.cadastroForm.getRawValue() as Autor;
       this.autorService
         .buscaAutorPorId(autor.id)
-        .subscribe((autorBuscado) => (this.autorEncontrado = autorBuscado));
+        .subscribe((autorBuscado) => (this.autorEncontrado = autorBuscado),
+        error => {
+          this.resposta(`Autor com o id ${autor.id} não existe`);
+          return of([])
+        });
     }
+  }
+
+  resposta(mensagem: string){
+    this.dialog.open(MensagemComponent,{
+      data: mensagem
+    })
   }
 }
