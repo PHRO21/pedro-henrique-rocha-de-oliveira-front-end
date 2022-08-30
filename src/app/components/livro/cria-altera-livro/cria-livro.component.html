@@ -4,15 +4,8 @@
 
     <div class="mb-3">
       <label for="titulo" class="form-label">Titulo</label>
-      <input
-        type="text"
-        class="form-control"
-        id="titulo"
-        name="titulo"
-        placeholder="Digite o titulo"
-        formControlName="titulo"
-        required
-        >
+      <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Digite o titulo"
+        formControlName="titulo" required>
 
       <div *ngIf="cadastroForm.get('titulo')?.errors?.['required'] && formDir.submitted" class="erro-validacao">
         <p>O Titulo é Obrigatório!</p>
@@ -21,31 +14,20 @@
 
     <div class="mb-3">
       <label for="anoLancamento" class="form-label">Ano Lançamento</label>
-      <input
-        type="number"
-        class="form-control"
-        id="anoLancamento"
-        name="anoLancamento"
-        placeholder="Digite o Ano Lançamento"
-        formControlName="anoLancamento"
-        >
+      <input type="number" class="form-control" id="anoLancamento" name="anoLancamento"
+        placeholder="Digite o Ano Lançamento" formControlName="anoLancamento">
       <div *ngIf="cadastroForm.get('anoLancamento')?.errors?.['required']&& formDir.submitted" class="erro-validacao">
         <p>O Ano Lançamento é Obrigatório.</p>
       </div>
     </div>
 
-    <div class="mb-3" >
-      <label for="autores" class="form-label">Ids Autores</label>
-      <input
-        type="number"
-        class="form-control"
-        id="autores"
-        name="autores"
-        placeholder="Digite os Ids dos Autores"
-        formArrayName="autores"
-        required
-        >
-        <!-- <button (click)="adicionaIdsAutores()" type="button" class="btn btn-primary">Adicionar</button> -->
+    <div class="mb-3">
+
+
+      <select formControlName="autoresIds" class="form-select" id="autoresIds" multiple="multiple" size="10">
+        <option value="0" disabled="disabled">Selecione os autores</option>
+        <option *ngFor="let autor of autores" value="{{autor.id}}">{{autor.nome}}</option>
+      </select>
       <div *ngIf="cadastroForm.get('autores')?.errors?.['required'] && formDir.submitted" class="erro-validacao">
         <p>É necessário no mínimo um Autor!</p>
       </div>
@@ -54,4 +36,3 @@
     <button type="submit" class="btn btn-primary">Enviar</button>
   </form>
 </div>
-

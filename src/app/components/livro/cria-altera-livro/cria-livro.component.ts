@@ -1,3 +1,4 @@
+import { AutorService } from './../../../services/autor.service';
 import { of } from 'rxjs';
 import { LivroInput } from '../LivroInput';
 import { Router } from '@angular/router';
@@ -6,6 +7,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MensagemComponent } from 'src/app/shared/mensagem/mensagem.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Autor } from '../../autor/autor';
 
 @Component({
   selector: 'app-cria-livro',
@@ -14,13 +16,18 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CriaLivroComponent implements OnInit {
 
+  id!: number | null;
+  autores: Autor[] = [];
+  erroNaRequisicao: string = '';
+  mensagemSemAutorCadastrado: string = '';
+
   cadastroForm!: FormGroup;
-  autores!: FormArray;
 
   constructor(
     private livroService: LivroService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private autorService: AutorService,
     public dialog: MatDialog
   ) {}
 
@@ -28,35 +35,57 @@ export class CriaLivroComponent implements OnInit {
     this.cadastroForm = this.formBuilder.group({
       titulo: ['', [Validators.required]],
       anoLancamento: ['', [Validators.required]],
-      autores: this.formBuilder.array(['', [Validators.required]]),
+      autoresIds:['', [Validators.required]],
     });
+    this.autorService.buscaTodosAutores().subscribe(
+      data => {
+        if (data.length > 0) {
+          this.autores = data;
+          this.buscaLivro();
+        } else {
+          this.mensagemSemAutorCadastrado = 'Cadastre autores primeiramente!';
+        }
+      },
+      error => {
+        if (error?.error?.message) {
+          this.erroNaRequisicao = error.error.message;
+        } else {
+          this.erroNaRequisicao = "Ocorreu um erro inesperado. Tem mais tarde, por favor!"
+        }
+      }
+    )
   }
 
-  extraiIds():FormGroup{
-    return this.formBuilder.group({
-      autores:[]
-    })
+  buscaLivro() {
+    if (this.id) {
+      this.livroService.buscaLivroPorId(this.id).subscribe(
+        data => {
+          this.cadastroForm = this.formBuilder.group({
+            titulo: [data.titulo, Validators.required],
+            anoLancamento: [data.anoLancamento, Validators.required],
+            autoresIds: [data.autores.map(autor=>{return autor.id + ''}), Validators.required]
+          });
+        },
+        error => {
+          if (error?.error?.message) {
+            this.erroNaRequisicao = error.error.message;
+          } else {
+            this.erroNaRequisicao = "Ocorreu um erro inesperado. Tem mais tarde, por favor!"
+          }
+        }
+      );
+    }
   }
-
-  // adicionaIdsAutores(){
-  //   let autoresFormArray = this.cadastroForm.get('autores') as FormArray
-
-  //   this.autores.(Array).forEach(() => {
-  //     autoresFormArray.push(this.extraiIds())
-  //   });
-  //   this.cadastroForm.patchValue(this.autores);
-  // }
 
   cadastrar() {
     if(this.cadastroForm.valid){
       const novoLivro = this.cadastroForm.getRawValue() as LivroInput;
       this.livroService.cadastraLivro(novoLivro).subscribe(sucesso =>{
         this.resposta("Livro cadastrado com sucesso")
-        this.router.navigate(['/autores'])
+        this.router.navigate(['/livros'])
       },
         error => {
           this.resposta("Erro ao Cadastrar Livro");
-          return of([])
         })
     }
   }

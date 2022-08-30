@@ -47,17 +47,10 @@
     </div>
 
     <div class="mb-3" >
-      <label for="autores" class="form-label">Ids Autores</label>
-      <input
-        type="number"
-        class="form-control"
-        id="autores"
-        name="autores"
-        placeholder="Digite os Ids dos Autores"
-        formArrayName="autores"
-        required
-        >
-        <!-- <button (click)="adicionaIdsAutores()" type="button" class="btn btn-primary">Adicionar</button> -->
+      <select formControlName="autoresIds" class="form-select" id="autoresIds" multiple="multiple" size="10">
+        <option value="0" disabled="disabled">Selecione os autores</option>
+        <option *ngFor="let autor of autores" value="{{autor.id}}">{{autor.nome}}</option>
+      </select>
       <div *ngIf="cadastroForm.get('autores')?.errors?.['required'] && formDir.submitted" class="erro-validacao">
         <p>É necessário no mínimo um Autor!</p>
       </div>

@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { LivroService } from '../../../services/livro.service';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { Autor } from '../../autor/autor';
+import { AutorService } from 'src/app/services/autor.service';
 
 @Component({
   selector: 'app-altera-livro',
@@ -14,14 +16,18 @@ import { Component, OnInit } from '@angular/core';
 
 export class AlteraLivroComponent implements OnInit {
 
+  id!: number | null;
+  autores: Autor[] = [];
+  erroNaRequisicao: string = '';
+  mensagemSemAutorCadastrado: string = '';
+
   cadastroForm!: FormGroup;
-  autores!: FormArray;
-  text = '';
 
   constructor(
     private livroService: LivroService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private autorService: AutorService,
     public dialog: MatDialog
   ) {}
 
@@ -30,24 +36,49 @@ export class AlteraLivroComponent implements OnInit {
       id:[''],
       titulo: ['', [Validators.required]],
       anoLancamento: ['', [Validators.required]],
-      autores: this.formBuilder.array(['', [Validators.required]]),
+      autoresIds: ['', [Validators.required]],
     });
+
+    this.autorService.buscaTodosAutores().subscribe(
+      data => {
+        if (data.length > 0) {
+          this.autores = data;
+          this.buscaLivro();
+        } else {
+          this.mensagemSemAutorCadastrado = 'Cadastre autores primeiramente!';
+        }
+      },
+      error => {
+        if (error?.error?.message) {
+          this.erroNaRequisicao = error.error.message;
+        } else {
+          this.erroNaRequisicao = "Ocorreu um erro inesperado. Tem mais tarde, por favor!"
+        }
+      }
+    )
   }
 
-  extraiIds():FormGroup{
-    return this.formBuilder.group({
-      autores:[]
-    })
+  buscaLivro() {
+    if (this.id) {
+      this.livroService.buscaLivroPorId(this.id).subscribe(
+        data => {
+          this.cadastroForm = this.formBuilder.group({
+            titulo: [data.titulo, Validators.required],
+            anoLancamento: [data.anoLancamento, Validators.required],
+            autoresIds: [data.autores.map(autor=>{return autor.id + ''}), Validators.required]
+          });
+        },
+        error => {
+          if (error?.error?.message) {
+            this.erroNaRequisicao = error.error.message;
+          } else {
+            this.erroNaRequisicao = "Ocorreu um erro inesperado. Tem mais tarde, por favor!"
+          }
+        }
+      );
+    }
   }
 
-  // adicionaIdsAutores(){
-  //   let autoresFormArray = this.cadastroForm.get('autores') as FormArray
-
-  //   this.autores.(Array).forEach(() => {
-  //     autoresFormArray.push(this.extraiIds())
-  //   });
-  //   this.cadastroForm.patchValue(this.autores);
-  // }
 
   alterar() {
     if(this.cadastroForm.valid){

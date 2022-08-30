@@ -21,9 +21,11 @@
       <tr *ngFor="let livro of livros">
         <td>{{livro.id}}</td>
         <td>{{livro.titulo}}</td>
-        <td *ngFor="let autor of livro.autores">{{autor.nome}}</td>
+        <td>
+          <div *ngFor="let autor of livro.autores">{{autor.nome}}</div>
+        </td>
         <div class="icone">
-          <button type="button" (click)="deleta(livro.id)"><i class="fa fa-solid fa-trash"></i></button>
+          <button type="button" (click)="deleta(livro.id)"><i class="fa fa-trash"></i></button>
         </div>
       </tr>
     </tbody>
